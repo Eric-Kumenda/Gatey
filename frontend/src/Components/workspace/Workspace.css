@@ -1,0 +1,14 @@
+.wire-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows clicks to pass through to the gates below */
+    z-index: 0; /* Wires should be behind gates */
+}
+
+/* Make sure gates are rendered on top of the wire layer */
+.gate {
+    z-index: 1;
+}

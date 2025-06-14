@@ -1,0 +1,17 @@
+.gate {
+  -webkit-user-select: none;
+  user-select: none; /* Prevents text selection while dragging */
+}
+
+.gate-body {
+  font-family: monospace;
+}
+
+.gate-port {
+  width: 16px;
+  height: 16px;
+}
+
+.gate-port:hover {
+  background-color: #e0e0e0;
+}

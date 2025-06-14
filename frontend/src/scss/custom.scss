@@ -1,0 +1,74 @@
+@use "../../node_modules/@coreui/coreui/scss/coreui" as * with (
+  // $primary: #5a05ba,
+  // //#6f4bfd,//#4e08db,
+  // $warning: #ff8633,
+  // $light: #fefffe,
+  // $body-bg: #e7e9ff,
+  // $body-bg-dark: #141414,
+  // $card-cap-bg: transparent,
+  // //$border-color: #d9dbdf,
+  // $border-color-dark: #2e2e2e,
+  $font-family-sans-serif: ("Nunito", sans-serif),
+  $font-size-base: 0.95rem,
+  $h5-font-size: 0.89rem,
+  $h6-font-size: 0.85rem
+);
+
+.wrapper {
+  width: 100%;
+  padding-inline: var(--cui-sidebar-occupy-start, 0)
+    var(--cui-sidebar-occupy-end, 0);
+  will-change: auto;
+  @include transition(padding 0.15s);
+}
+
+.simplebar-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* Sidebar bullets fix */
+.nav-group,
+.nav-item,
+.nav-group-items {
+  //list-style: none !important;
+  //margin-left: 0;
+  //padding-left: 0;
+}
+.header > .container-fluid,
+.sidebar-header {
+  min-height: calc(
+    4rem + 1px
+  ); // stylelint-disable-line function-disallowed-list
+}
+
+.sidebar-brand-full {
+  margin-left: 3px;
+}
+
+.sidebar-header {
+  .nav-underline-border {
+    --cui-nav-underline-border-link-padding-x: 1rem;
+    --cui-nav-underline-border-gap: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: calc(
+      4rem + 1px
+    ); // stylelint-disable-line function-disallowed-list
+  }
+}
+
+.sidebar-toggler {
+  margin-inline-start: auto;
+}
+
+.sidebar-narrow,
+.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-toggler {
+    margin-inline-end: auto;
+  }
+}
