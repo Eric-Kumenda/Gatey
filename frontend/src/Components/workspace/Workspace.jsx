@@ -18,7 +18,7 @@ import {
 } from "../../store/panelPortsSlice"; // Import panelPortsSlice actions/selectors
 import Gate from "../gate/Gate";
 import Wire from "../wire/Wire";
-import InputPanel from "./InputPanel"; // Import new panels
+import InputPanel from "./inputPanel"; // Import new panels
 import OutputPanel from "./OutputPanel";
 import { ItemTypes as SidebarItemTypes } from "../AppSidebar";
 import "./Workspace.css";
@@ -35,13 +35,11 @@ const Workspace = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // State for mouse position
 
   const handleMouseMove = (e) => {
-    if (connectionInProgress?.isConnecting) { // Only track if a connection is active
       const workspaceRect = workspaceRef.current.getBoundingClientRect();
       setMousePosition({
         x: e.clientX - workspaceRect.left,
         y: e.clientY - workspaceRect.top,
       });
-    }
   };
 
   const handleClick = (e) => {

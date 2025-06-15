@@ -27,6 +27,17 @@ const getPortGlobalPosition = (portElement) => {
   };
 };
 
+function generateOffsetFromHash(str, maxOffset = 10) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  // Create pseudo-random offset in both x and y directions
+  const x = ((hash >> 3) % (2 * maxOffset)) - maxOffset;
+  const y = ((hash >> 5) % (2 * maxOffset)) - maxOffset;
+  return { x, y };
+}
+
 const Wire = ({ wire, getGateAndPortElements }) => {
   const [path, setPath] = useState("");
   const { source, destination, isActive, value } = wire; // Destructure 'value' from wire state
@@ -60,15 +71,23 @@ const Wire = ({ wire, getGateAndPortElements }) => {
       const endX = destPos.x;
       const endY = destPos.y;
 
-      // Simple Manhattan routing (straight then bend)
+      // Midpoint with optional offset
       const midX = (startX + endX) / 2;
+      const midY = (startY + endY) / 2;
+
+      // Use a deterministic offset based on IDs
+      const hash = `${source.gateId}-${source.portId}-${destination.gateId}-${destination.portId}`;
+      const offset = generateOffsetFromHash(hash, 10); // up to ±10 px offset
+
+      const offsetMidX = midX + offset.x;
+      const offsetMidY = midY + offset.y;
 
       const pathData = `
-        M ${startX} ${startY}
-        L ${midX} ${startY}
-        L ${midX} ${endY}
-        L ${endX} ${endY}
-      `;
+    M ${startX} ${startY}
+    L ${offsetMidX} ${startY}
+    L ${offsetMidX} ${endY}
+    L ${endX} ${endY}
+  `;
 
       return pathData;
     };

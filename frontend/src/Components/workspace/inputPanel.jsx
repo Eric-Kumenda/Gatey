@@ -34,7 +34,7 @@ const PanelInputPort = ({
     onPortClick("inputPanel", id, "output", portRef.current); // Panel input ports act as outputs
     if (!isActive) {
       // Only toggle if not actively connecting from it
-      onToggle(id);
+      onToggle(id, value);
     }
   };
 
@@ -69,7 +69,7 @@ const PanelInputPort = ({
   };
 
   const activeClass = isActive ? "port-active" : "";
-  const valueClass = value ? "bg-primary" : "bg-dark-subtle"; // Bright blue for on, dark blue for off
+  const valueClass = value ? "bg-success" : "bg-dark-subtle"; // Bright blue for on, dark blue for off
 
   return (
     <div
@@ -119,8 +119,9 @@ const InputPanel = ({ onPortClick }) => {
     dispatch(addInputPort());
   };
 
-  const handleToggle = (id) => {
-    dispatch(toggleInputPort({ id }));
+  const handleToggle = (id, currentValue) => {
+    const newValue = !currentValue;
+    dispatch(toggleInputPort({ id, value: newValue }));
   };
 
   const handleRename = (id, name) => {
@@ -134,7 +135,10 @@ const InputPanel = ({ onPortClick }) => {
   };
 
   return (
-    <div className="input-panel border rounded p-3 me-0 bg-body d-flex flex-column align-items-center" id="input-panel">
+    <div
+      className="input-panel border rounded p-3 me-0 bg-body d-flex flex-column align-items-center"
+      id="input-panel"
+    >
       <h5 className="mb-3">Inputs</h5>
       <div className="d-flex flex-column mb-3">
         {inputPorts.map((port) => (

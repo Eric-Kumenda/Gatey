@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
   inputs: {}, // { portId: { id, name, value (true/false) } }
@@ -6,36 +6,29 @@ const initialState = {
 };
 
 const panelPortsSlice = createSlice({
-  name: 'panelPorts',
+  name: "panelPorts",
   initialState,
   reducers: {
-    addInputPort: {
-      reducer(state, action) {
-        state.inputs[action.payload.id] = action.payload;
-      },
-      prepare(name) {
-        return {
-          payload: {
-            id: nanoid(),
-            name: name || `Input ${Object.keys(initialState.inputs).length + 1}`,
-            value: false, // Default to off
-          },
-        };
-      },
+    addInputPort(state, action) {
+      const id = nanoid();
+      const name =
+        action.payload?.name || `In ${Object.keys(state.inputs).length + 1}`;
+      state.inputs[id] = {
+        id,
+        name,
+        value: false,
+      };
     },
-    addOutputPort: {
-      reducer(state, action) {
-        state.outputs[action.payload.id] = action.payload;
-      },
-      prepare(name) {
-        return {
-          payload: {
-            id: nanoid(),
-            name: name || `Output ${Object.keys(initialState.outputs).length + 1}`,
-            value: false, // Default to off
-          },
-        };
-      },
+    addOutputPort(state, action) {
+      const id = nanoid();
+      const name =
+        action.payload?.name ||
+        `Out ${Object.keys(state.outputs).length + 1}`;
+      state.outputs[id] = {
+        id,
+        name,
+        value: false,
+      };
     },
     toggleInputPort: (state, action) => {
       const { id } = action.payload;
@@ -82,10 +75,11 @@ export const {
   updateOutputPortName,
 } = panelPortsSlice.actions;
 
-export const selectAllInputPorts = (state) => Object.values(state.panelPorts.inputs);
-export const selectAllOutputPorts = (state) => Object.values(state.panelPorts.outputs);
+export const selectAllInputPorts = (state) =>
+  Object.values(state.panelPorts.inputs);
+export const selectAllOutputPorts = (state) =>
+  Object.values(state.panelPorts.outputs);
 export const selectInputPortById = (state, id) => state.panelPorts.inputs[id];
 export const selectOutputPortById = (state, id) => state.panelPorts.outputs[id];
-
 
 export default panelPortsSlice.reducer;

@@ -17,7 +17,7 @@ import {
 } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 
-import avatar from "/logo/logo-light.png";
+import avatar from "/img/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 

@@ -10,6 +10,7 @@ import {
 import {
   setConnectionInProgress,
   selectConnectionInProgress,
+  removeWiresConnectedToGate,
 } from "../../store/wiresSlice";
 import ContextMenu from "../ContextMenu";
 

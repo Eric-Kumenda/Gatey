@@ -59,6 +59,7 @@ const wiresSlice = createSlice({
     // New action to set the value of a wire
     setWireValue: (state, action) => {
       const { wireId, value } = action.payload;
+      console.log(action.payload)
       if (state.entities[wireId] && state.entities[wireId].value !== value) {
         state.entities[wireId].value = value;
       }
