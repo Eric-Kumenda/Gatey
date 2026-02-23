@@ -93,4 +93,6 @@ The simulation logic is built upon a reactive system powered by Redux Toolkit's 
   * Visual indicators for gate input/output labels
   * Error handling for invalid connections (e.g., output to output)
 
------
+---
+
+--
